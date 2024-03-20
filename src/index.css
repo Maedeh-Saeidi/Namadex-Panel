@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "IRANSans";
+  src: url("./fonts/IRANSans 400.ttf") format("truetype");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
