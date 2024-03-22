@@ -10,6 +10,7 @@ export default function SectionList() {
   const [images, setImages] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [id, setId] = useState("");
+  const [reRender, setReRender] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,13 +29,19 @@ export default function SectionList() {
           imageUrls.push(imageUrl);
         }
         setImages(imageUrls);
+
         setIsLoading(true);
       } catch (error) {
         console.error("Error fetching data", error);
       }
     };
     fetchData();
-  }, []);
+    if (reRender) {
+      fetchData();
+      console.log("reRendering happens");
+      setReRender(false);
+    }
+  }, [reRender]);
 
   return (
     <div>
@@ -45,7 +52,12 @@ export default function SectionList() {
         setOpenPopup={setOpenPopup}
         setId={setId}
       ></SectionTable>
-      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup} id={id}></Popup>
+      <Popup
+        setReRender={setReRender}
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+        id={id}
+      ></Popup>
     </div>
   );
 }

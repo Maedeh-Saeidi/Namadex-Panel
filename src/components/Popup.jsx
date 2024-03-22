@@ -12,7 +12,7 @@ import useAccessToken from "./useAccessToken";
 
 import axios from "axios";
 
-export default function Popup({ openPopup, setOpenPopup, id }) {
+export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
   const [secInfo, setSecInfo] = useState(null);
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
@@ -79,6 +79,7 @@ export default function Popup({ openPopup, setOpenPopup, id }) {
         );
         console.log("Data sent to API:", title, desc, img);
         setOpenPopup(false);
+        setReRender(true);
       } catch (error) {
         console.error("Error saving data", error);
       }
