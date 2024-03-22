@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Box,
   Stack,
@@ -10,6 +11,7 @@ import {
   Checkbox,
 } from "@mui/material";
 import axios from "axios";
+import useAccessToken from "./useAccessToken";
 
 export default function LoginForm({
   setStatus,
@@ -20,6 +22,7 @@ export default function LoginForm({
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [hasError, setHasError] = useState(false);
+  const accessToken = useAccessToken();
 
   const onSignin = (e) => {
     e.preventDefault();
@@ -36,7 +39,7 @@ export default function LoginForm({
     axios(configuration)
       .then((result) => {
         setStatus(true);
-        console.log("logged in successfully");
+        localStorage.setItem("accessToken", result.data.data.token);
       })
       .catch((error) => {
         console.log(error.message);
@@ -57,7 +60,6 @@ export default function LoginForm({
       }, 3100);
     }
   };
-
   return (
     <Box component="form" maxWidth={400} width="100%" onSubmit={onSignin}>
       <Stack spacing={3}>
