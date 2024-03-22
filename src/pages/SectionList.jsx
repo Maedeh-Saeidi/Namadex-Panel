@@ -42,7 +42,6 @@ export default function SectionList() {
       setReRender(false);
     }
   }, [reRender]);
-
   return (
     <div>
       <SectionTable

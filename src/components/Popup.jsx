@@ -16,7 +16,7 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
   const [secInfo, setSecInfo] = useState(null);
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const accessToken = useAccessToken();
 
@@ -44,27 +44,13 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
     }
   }, [id]);
 
-  const handleFileChange = (file) => {
-    if (file) {
-      // Read the selected file as a data URL
-      const reader = new FileReader();
-      reader.onload = () => {
-        // Update the img state with the data URL of the selected image
-        setImg(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handleSave = () => {
-    console.log(accessToken);
     const saveData = async () => {
       try {
-        console.log(id);
         const formData = new FormData();
-
         formData.append("title", title);
         formData.append("description", desc);
+        formData.append("img", img);
 
         const config = {
           headers: {
@@ -84,11 +70,9 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
         console.error("Error saving data", error);
       }
     };
-
     saveData();
     console.log(title, desc, img);
   };
-
   return (
     <div>
       {isLoading ? (
@@ -136,11 +120,11 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
                 alignItems: "center",
               }}
             >
-              <img src={img} alt={`Image of section ${id}`} />
+              <img src={img} width={100} alt={`Image of section ${id}`} />
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => handleFileChange(e.target.files[0])}
+                onChange={(e) => setImg(e.target.files[0])}
               />
             </div>
           </DialogContent>
