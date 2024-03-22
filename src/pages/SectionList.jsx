@@ -18,6 +18,7 @@ export default function SectionList() {
         const sectionApi = "https://api.namadex.ir/api/v1/section";
         const getSections = await axios.get(sectionApi);
         const allSections = getSections.data.data;
+        allSections.sort((a, b) => a.id - b.id);
         setSections(allSections);
 
         const imageUrls = [];
@@ -38,7 +39,6 @@ export default function SectionList() {
     fetchData();
     if (reRender) {
       fetchData();
-      console.log("reRendering happens");
       setReRender(false);
     }
   }, [reRender]);

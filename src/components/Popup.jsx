@@ -86,7 +86,6 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
     };
 
     saveData();
-
     console.log(title, desc, img);
   };
 
@@ -99,7 +98,7 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
               style={{ display: "flex", gap: "10rem", marginBottom: "1rem" }}
             >
               <Typography variant="h6" style={{ flexGrow: 1 }}>
-                Edit Details{" "}
+                Edit Details
               </Typography>
               <Button
                 onClick={() => setOpenPopup(false)}
