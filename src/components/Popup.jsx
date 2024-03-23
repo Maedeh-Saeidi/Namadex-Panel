@@ -17,6 +17,7 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
   const [img, setImg] = useState(null);
+  const [newImg, setNewImg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const accessToken = useAccessToken();
 
@@ -45,12 +46,15 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
   }, [id]);
 
   const handleSave = () => {
+    console.log(newImg);
     const saveData = async () => {
       try {
         const formData = new FormData();
         formData.append("title", title);
         formData.append("description", desc);
-        formData.append("img", img);
+        if (newImg !== null) {
+          formData.append("img", newImg);
+        }
 
         const config = {
           headers: {
@@ -63,7 +67,7 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
           formData,
           config
         );
-        console.log("Data sent to API:", title, desc, img);
+        console.log("Data sent to API:", title, desc, newImg);
         setOpenPopup(false);
         setReRender(true);
       } catch (error) {
@@ -71,7 +75,7 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
       }
     };
     saveData();
-    console.log(title, desc, img);
+    console.log(title, desc, newImg);
   };
   return (
     <div>
@@ -124,7 +128,7 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => setImg(e.target.files[0])}
+                onChange={(e) => setNewImg(e.target.files[0])}
               />
             </div>
           </DialogContent>
