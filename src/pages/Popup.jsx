@@ -8,7 +8,7 @@ import {
   DialogActions,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import useAccessToken from "./useAccessToken";
+import useAccessToken from "../components/useAccessToken";
 
 import axios from "axios";
 
@@ -44,7 +44,6 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
   }, [id]);
 
   const handleSave = () => {
-    console.log(newImg);
     const saveData = async () => {
       try {
         const formData = new FormData();
@@ -73,7 +72,6 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
       }
     };
     saveData();
-    console.log(title, desc, newImg);
   };
   return (
     <div>

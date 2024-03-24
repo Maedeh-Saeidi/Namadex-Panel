@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Popup from "../components/Popup";
+import Popup from "./Popup";
 import SectionTable from "../components/SectionTable";
+import PostsPopup from "./PostsPopup";
 
 export default function SectionList() {
   const [sections, setSections] = useState("");
@@ -10,6 +11,7 @@ export default function SectionList() {
   const [openPopup, setOpenPopup] = useState(false);
   const [id, setId] = useState("");
   const [reRender, setReRender] = useState(false);
+  const [dspPosts, setDspPosts] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,6 +49,7 @@ export default function SectionList() {
         sections={sections}
         images={images}
         setOpenPopup={setOpenPopup}
+        setDspPosts={setDspPosts}
         setId={setId}
       ></SectionTable>
       <Popup
@@ -55,6 +58,13 @@ export default function SectionList() {
         setOpenPopup={setOpenPopup}
         id={id}
       ></Popup>
+      <PostsPopup
+        sections={sections}
+        isLoading={isLoading}
+        dspPosts={dspPosts}
+        setDspPosts={setDspPosts}
+        id={id}
+      ></PostsPopup>
     </div>
   );
 }

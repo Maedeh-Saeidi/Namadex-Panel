@@ -13,12 +13,18 @@ export default function SectionTable({
   sections,
   images,
   setOpenPopup,
+  setDspPosts,
   setId,
 }) {
   const handleEditClick = (id) => {
     setOpenPopup(true);
     setId(id);
   };
+  const handlePostsClick = (id) => {
+    setDspPosts(true);
+    setId(id);
+  };
+
   return (
     <div>
       {isLoading ? (
@@ -31,6 +37,7 @@ export default function SectionTable({
                 <TableCell align="left">Description</TableCell>
                 <TableCell align="left">Image</TableCell>
                 <TableCell align="center">Edit</TableCell>
+                <TableCell align="center">Posts</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -65,6 +72,18 @@ export default function SectionTable({
                       onClick={() => handleEditClick(row.id)}
                     >
                       edit
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      style={{
+                        textTransform: "lowercase",
+                        color: "green",
+                      }}
+                      key={row.id}
+                      onClick={() => handlePostsClick(row.id)}
+                    >
+                      posts
                     </Button>
                   </TableCell>
                 </TableRow>
