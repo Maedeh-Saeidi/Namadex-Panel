@@ -6,7 +6,6 @@ import SectionTable from "../components/SectionTable";
 export default function SectionList() {
   const [sections, setSections] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [imageUrls, setImageUrls] = useState([]);
   const [images, setImages] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [id, setId] = useState("");
@@ -30,7 +29,6 @@ export default function SectionList() {
           imageUrls.push(imageUrl);
         }
         setImages(imageUrls);
-
         setIsLoading(true);
       } catch (error) {
         console.error("Error fetching data", error);
@@ -47,7 +45,7 @@ export default function SectionList() {
       <SectionTable
         isLoading={isLoading}
         sections={sections}
-        imageUrls={imageUrls}
+        images={images}
         setOpenPopup={setOpenPopup}
         setId={setId}
       ></SectionTable>

@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 export default function SectionTable({
   isLoading,
   sections,
-  imageUrls,
+  images,
   setOpenPopup,
   setId,
 }) {
@@ -19,7 +19,6 @@ export default function SectionTable({
     setOpenPopup(true);
     setId(id);
   };
-
   return (
     <div>
       {isLoading ? (
@@ -51,9 +50,14 @@ export default function SectionTable({
                     {row.description}
                   </TableCell>
                   <TableCell>
-                    {<img src={imageUrls[index]} alt={`Image ${index}`} />}
+                    {
+                      <img
+                        width={100}
+                        src={images[index]}
+                        alt={`Image ${index}`}
+                      />
+                    }
                   </TableCell>
-
                   <TableCell>
                     <Button
                       key={row.id}

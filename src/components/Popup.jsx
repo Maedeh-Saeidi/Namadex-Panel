@@ -13,7 +13,6 @@ import useAccessToken from "./useAccessToken";
 import axios from "axios";
 
 export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
-  const [secInfo, setSecInfo] = useState(null);
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
   const [img, setImg] = useState(null);
@@ -27,7 +26,6 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
         const response = await axios.get(
           `https://api.namadex.ir/api/v1/section/${id}`
         );
-        setSecInfo(response.data.data);
         setTitle(response.data.data.title);
         setDesc(response.data.data.description);
 
