@@ -24,7 +24,6 @@ export default function SectionTable({
     setDspPosts(true);
     setId(id);
   };
-
   return (
     <div>
       {isLoading ? (
