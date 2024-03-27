@@ -9,7 +9,6 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  TextField,
 } from "@mui/material";
 
 export default function PostsPopupDialog({
@@ -52,7 +51,7 @@ export default function PostsPopupDialog({
                 {isLoading && id && (
                   <TableCell
                     sx={{ fontSize: "1.2rem" }}
-                    colSpan={5}
+                    colSpan={6}
                     variant="head"
                     align="center"
                   >
@@ -64,51 +63,19 @@ export default function PostsPopupDialog({
                 section.posts.length ? (
                   <React.Fragment>
                     <TableRow>
-                      <TableCell>
-                        <Typography variant="h6">Title</Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="h6">Description</Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="h6">Link</Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="h6">Image</Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="h6">Icon</Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="h6">Edit</Typography>
-                      </TableCell>
+                      <TableCell align="left">Title</TableCell>
+                      <TableCell>Description</TableCell>
+                      <TableCell align="left">Link</TableCell>
+                      <TableCell align="left">Image</TableCell>
+                      <TableCell align="left">Icon</TableCell>
+                      <TableCell align="center">Edit</TableCell>
                     </TableRow>
                     {section.posts.map((post, index) => (
-                      <TableRow key={index}>
-                        <TableCell>
-                          <TextField
-                            value={post.title}
-                            label="Title"
-                            fullWidth
-                            variant="outlined"
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <TextField
-                            value={post.description}
-                            label="Description"
-                            fullWidth
-                            variant="outlined"
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <TextField
-                            value={post.link}
-                            label="Link"
-                            fullWidth
-                            variant="outlined"
-                          />
-                        </TableCell>
+                      <TableRow key={post.id}>
+                        <TableCell>{post.title}</TableCell>
+
+                        <TableCell>{post.description}</TableCell>
+                        <TableCell>{post.link}</TableCell>
                         <TableCell>
                           <img
                             width={100}
@@ -125,9 +92,11 @@ export default function PostsPopupDialog({
                         </TableCell>
                         <TableCell>
                           <Button
-                            variant="contained"
                             color="secondary"
-                            style={{ textTransform: "lowercase" }}
+                            style={{
+                              textTransform: "lowercase",
+                              color: "purple",
+                            }}
                             onClick={() => handleEditePost(post.id)}
                           >
                             edit

@@ -10,12 +10,14 @@ export default function PostsPopup({
   sections,
   isLoading,
   id,
+  setReRender,
 }) {
   const [editPost, setEditPost] = useState(false);
   const [postId, setPostId] = useState(null);
   const [imageUrls, setImageUrls] = useState({});
   const [iconUrls, setIconUrls] = useState({});
   const [isLoadingData, setIsLoadingData] = useState(false);
+  const [reRenderPosts, setreRenderPosts] = useState(false);
 
   let section;
   if (id) {
@@ -75,7 +77,11 @@ export default function PostsPopup({
         console.error("Error fetching post data:", error);
         setIsLoadingData(false);
       });
-  }, [sections]);
+    if (reRenderPosts) {
+      fetchPostData();
+      setreRenderPosts(false);
+    }
+  }, [sections, reRenderPosts]);
 
   return (
     <div>
@@ -96,6 +102,8 @@ export default function PostsPopup({
         postId={postId}
         setEditPost={setEditPost}
         editPost={editPost}
+        setreRenderPosts={setreRenderPosts}
+        setReRender={setReRender}
       ></EditPosts>
     </div>
   );

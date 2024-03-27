@@ -59,6 +59,7 @@ export default function SectionList() {
         id={id}
       ></Popup>
       <PostsPopup
+        setReRender={setReRender}
         sections={sections}
         isLoading={isLoading}
         dspPosts={dspPosts}
