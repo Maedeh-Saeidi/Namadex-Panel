@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import CreatePost from "../components/CreatePost";
+import { useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -21,12 +23,17 @@ export default function PostsPopupDialog({
   iconUrls,
   setPostId,
   setEditPost,
+  setreRenderPosts,
+  setReRender,
 }) {
-  const handleEditePost = (id) => {
-    setPostId(id);
-    setEditPost(true);
-  };
+  const [createPost, setCreatePost] = useState(false);
+  const [secId, setSecId] = useState("");
 
+  useEffect(() => {
+    if (section) {
+      setSecId(section.id);
+    }
+  }, [section]);
   return (
     <div>
       <Dialog open={dspPosts} fullWidth maxWidth="md">
@@ -97,7 +104,7 @@ export default function PostsPopupDialog({
                               textTransform: "lowercase",
                               color: "purple",
                             }}
-                            onClick={() => handleEditePost(post.id)}
+                            onClick={() => setEditPost(true)}
                           >
                             edit
                           </Button>
@@ -121,6 +128,25 @@ export default function PostsPopupDialog({
               )}
             </TableBody>
           </Table>
+          <div dir="rtl">
+            <Button
+              color="secondary"
+              style={{
+                textTransform: "lowercase",
+                color: "blue",
+              }}
+              onClick={() => setCreatePost(true)}
+            >
+              Create a post
+            </Button>
+          </div>
+          <CreatePost
+            secId={secId}
+            createPost={createPost}
+            setCreatePost={setCreatePost}
+            setReRender={setReRender}
+            setreRenderPosts={setreRenderPosts}
+          />
         </DialogContent>
       </Dialog>
     </div>

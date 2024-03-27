@@ -70,7 +70,6 @@ export default function PostsPopup({
         setIconUrls(iconUrlsObject);
       });
     };
-
     fetchPostData()
       .then(() => setIsLoadingData(true))
       .catch((error) => {
@@ -96,7 +95,9 @@ export default function PostsPopup({
           iconUrls={iconUrls}
           setPostId={setPostId}
           setEditPost={setEditPost}
-        ></PostsPopupDialog>
+          setreRenderPosts={setreRenderPosts}
+          setReRender={setReRender}
+        />
       </div>
       <EditPosts
         postId={postId}
@@ -104,7 +105,7 @@ export default function PostsPopup({
         editPost={editPost}
         setreRenderPosts={setreRenderPosts}
         setReRender={setReRender}
-      ></EditPosts>
+      />
     </div>
   );
 }
