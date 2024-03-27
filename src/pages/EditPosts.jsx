@@ -29,7 +29,6 @@ export default function EditPosts({
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("calling api on id:", postId);
       try {
         const response = await axios.get(
           `https://api.namadex.ir/api/v1/section/post/${postId}`

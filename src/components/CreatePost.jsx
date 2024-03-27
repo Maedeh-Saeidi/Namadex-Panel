@@ -42,14 +42,6 @@ export default function CreatePost({
           formData,
           config
         );
-        console.log(
-          "Create a Post's data sent to API:",
-          postTitle,
-          postDes,
-          postLink,
-          postImage,
-          postIcon
-        );
         setCreatePost(false);
         setreRenderPosts(true);
         setReRender(true);

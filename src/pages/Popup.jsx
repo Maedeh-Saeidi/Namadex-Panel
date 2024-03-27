@@ -64,7 +64,6 @@ export default function Popup({ openPopup, setOpenPopup, id, setReRender }) {
           formData,
           config
         );
-        console.log("Data sent to API:", title, desc, newImg);
         setOpenPopup(false);
         setReRender(true);
       } catch (error) {
