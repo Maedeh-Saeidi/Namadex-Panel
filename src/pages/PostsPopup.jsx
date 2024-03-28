@@ -33,23 +33,21 @@ export default function PostsPopup({
     const fetchPostData = async () => {
       const imagePromises = [];
       const iconPromises = [];
+      section.posts.forEach((post) => {
+        const imagePromise = axios
+          .get(`https://api.namadex.ir/api/v1/section/post/${post.id}/image`)
+          .then((response) => {
+            return response.config.url;
+          });
+        imagePromises.push(imagePromise);
 
-      sections.forEach((section) => {
-        section.posts.forEach((post) => {
-          const imagePromise = axios
-            .get(`https://api.namadex.ir/api/v1/section/post/${post.id}/image`)
-            .then((response) => response.config.url);
-          imagePromises.push(imagePromise);
-
-          const iconPromise = axios
-            .get(`https://api.namadex.ir/api/v1/section/post/${post.id}/icon`)
-            .then((response) => {
-              return response.config.url;
-            });
-          iconPromises.push(iconPromise);
-        });
+        const iconPromise = axios
+          .get(`https://api.namadex.ir/api/v1/section/post/${post.id}/icon`)
+          .then((response) => {
+            return response.config.url;
+          });
+        iconPromises.push(iconPromise);
       });
-
       Promise.all(imagePromises).then((urls) => {
         const imageUrlsObject = sections.reduce((acc, section, index) => {
           section.posts.forEach((post, innerIndex) => {
@@ -57,7 +55,6 @@ export default function PostsPopup({
           });
           return acc;
         }, {});
-        setImageUrls(imageUrlsObject);
       });
 
       Promise.all(iconPromises).then((urls) => {
@@ -80,8 +77,7 @@ export default function PostsPopup({
       fetchPostData();
       setreRenderPosts(false);
     }
-  }, [sections, reRenderPosts]);
-
+  }, [section, reRenderPosts]);
   return (
     <div>
       <div>

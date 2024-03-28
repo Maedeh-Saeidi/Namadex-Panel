@@ -22,9 +22,9 @@ export default function EditPosts({
   const [icon, setIcon] = useState(null);
   const [newpImg, setNewpImg] = useState(null);
   const [newIcon, setNewIcon] = useState(null);
-  const [pTitle, setpTitle] = useState(null);
-  const [pDesc, setpDesc] = useState(null);
-  const [pLink, setpLink] = useState(null);
+  const [pTitle, setpTitle] = useState("");
+  const [pDesc, setpDesc] = useState("");
+  const [pLink, setpLink] = useState("");
   const accessToken = useAccessToken();
 
   useEffect(() => {
@@ -169,7 +169,11 @@ export default function EditPosts({
               paddingLeft: "1rem",
             }}
           >
-            <img src={pImg} width={100} alt={`Image of post ${postId}`} />
+            <img
+              src={`https://api.namadex.ir/api/v1/section/post/${postId}/image`}
+              width={100}
+              alt={`Image of post ${postId}`}
+            />
             <input
               type="file"
               accept="image/*"

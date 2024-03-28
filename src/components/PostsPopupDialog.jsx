@@ -77,40 +77,45 @@ export default function PostsPopupDialog({
                       <TableCell align="left">Icon</TableCell>
                       <TableCell align="center">Edit</TableCell>
                     </TableRow>
-                    {section.posts.map((post, index) => (
-                      <TableRow key={post.id}>
-                        <TableCell>{post.title}</TableCell>
+                    {section.posts
+                      .sort((a, b) => a.id - b.id)
+                      .map((post, index) => (
+                        <TableRow key={post.id}>
+                          <TableCell>{post.title}</TableCell>
 
-                        <TableCell>{post.description}</TableCell>
-                        <TableCell>{post.link}</TableCell>
-                        <TableCell>
-                          <img
-                            width={100}
-                            src={`${imageUrls[post.id]}`}
-                            alt={`Image ${post.id}`}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <img
-                            width={100}
-                            src={iconUrls[post.id]}
-                            alt={`Icon ${post.id}`}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <Button
-                            color="secondary"
-                            style={{
-                              textTransform: "lowercase",
-                              color: "purple",
-                            }}
-                            onClick={() => setEditPost(true)}
-                          >
-                            edit
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                          <TableCell>{post.description}</TableCell>
+                          <TableCell>{post.link}</TableCell>
+                          <TableCell>
+                            <img
+                              width={100}
+                              src={`https://api.namadex.ir/api/v1/section/post/${post.id}/image`}
+                              alt={`Image ${post.id}`}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <img
+                              width={100}
+                              src={`https://api.namadex.ir/api/v1/section/post/${post.id}/icon`}
+                              alt={`Icon ${post.id}`}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Button
+                              color="secondary"
+                              style={{
+                                textTransform: "lowercase",
+                                color: "purple",
+                              }}
+                              onClick={() => {
+                                setPostId(post.id);
+                                setEditPost(true);
+                              }}
+                            >
+                              edit
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
                   </React.Fragment>
                 ) : (
                   <TableRow>
