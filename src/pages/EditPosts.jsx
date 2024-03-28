@@ -15,16 +15,13 @@ export default function EditPosts({
   editPost,
   setEditPost,
   postId,
-  setreRenderPosts,
   setReRender,
 }) {
-  const [pImg, setpImg] = useState(null);
-  const [icon, setIcon] = useState(null);
   const [newpImg, setNewpImg] = useState(null);
   const [newIcon, setNewIcon] = useState(null);
-  const [pTitle, setpTitle] = useState("");
-  const [pDesc, setpDesc] = useState("");
-  const [pLink, setpLink] = useState("");
+  const [pTitle, setpTitle] = useState(" ");
+  const [pDesc, setpDesc] = useState(" ");
+  const [pLink, setpLink] = useState(" ");
   const accessToken = useAccessToken();
 
   useEffect(() => {
@@ -36,14 +33,6 @@ export default function EditPosts({
         setpTitle(response.data.data.title);
         setpDesc(response.data.data.description);
         setpLink(response.data.data.link);
-        const imageResponse = await axios.get(
-          `https://api.namadex.ir/api/v1/section/post/${postId}/image`
-        );
-        setpImg(imageResponse.config.url);
-        const iconResponse = await axios.get(
-          `https://api.namadex.ir/api/v1/section/post/${postId}/icon`
-        );
-        setIcon(iconResponse.config.url);
       } catch (error) {
         console.error("Error fetching post data:", error);
       }
@@ -85,7 +74,6 @@ export default function EditPosts({
           newIcon
         );
         setEditPost(false);
-        setreRenderPosts(true);
         setReRender(true);
       } catch (error) {
         console.error("Error saving data", error);
@@ -108,7 +96,6 @@ export default function EditPosts({
         .then((response) => {
           console.log(`Post with ID ${postId} deleted successfully`);
           setEditPost(false);
-          setreRenderPosts(true);
           setReRender(true);
         })
         .catch((error) => {
@@ -191,7 +178,11 @@ export default function EditPosts({
               paddingLeft: "1rem",
             }}
           >
-            <img src={icon} width={100} alt={`Icon of post ${postId}`} />
+            <img
+              src={`https://api.namadex.ir/api/v1/section/post/${postId}/icon`}
+              width={100}
+              alt={`Icon of post ${postId}`}
+            />
             <input
               type="file"
               accept="image/*"

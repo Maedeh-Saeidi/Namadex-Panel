@@ -9,7 +9,6 @@ export default function CreatePost({
   setCreatePost,
   secId,
   setReRender,
-  setreRenderPosts,
 }) {
   const [postTitle, setPostTitle] = useState("");
   const [postDes, setPostDes] = useState("");
@@ -43,8 +42,12 @@ export default function CreatePost({
           config
         );
         setCreatePost(false);
-        setreRenderPosts(true);
         setReRender(true);
+        setPostTitle("");
+        setPostDes("");
+        setPostLink("");
+        setPostImage(null);
+        setPostIcon(null);
       } catch (error) {
         console.error("Error saving data", error);
       }

@@ -19,11 +19,8 @@ export default function PostsPopupDialog({
   setDspPosts,
   id,
   section,
-  imageUrls,
-  iconUrls,
   setPostId,
   setEditPost,
-  setreRenderPosts,
   setReRender,
 }) {
   const [createPost, setCreatePost] = useState(false);
@@ -150,7 +147,6 @@ export default function PostsPopupDialog({
             createPost={createPost}
             setCreatePost={setCreatePost}
             setReRender={setReRender}
-            setreRenderPosts={setreRenderPosts}
           />
         </DialogContent>
       </Dialog>
