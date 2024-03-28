@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Stack,
@@ -22,7 +21,28 @@ export default function LoginForm({
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [hasError, setHasError] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const accessToken = useAccessToken();
+
+  useEffect(() => {
+    // Check if remember me is enabled and load the saved username and password
+    const savedUsername = localStorage.getItem("rememberedUsername");
+    const savedPassword = localStorage.getItem("rememberedPassword");
+    if (savedUsername && savedPassword) {
+      setUserName(savedUsername);
+      setPassword(savedPassword);
+      setRememberMe(true);
+    }
+  }, []);
+
+  const handleRememberMeChange = (event) => {
+    setRememberMe(event.target.checked);
+    if (!event.target.checked) {
+      // If remember me is unchecked, clear the saved username and password
+      localStorage.removeItem("rememberedUsername");
+      localStorage.removeItem("rememberedPassword");
+    }
+  };
 
   const onSignin = (e) => {
     e.preventDefault();
@@ -39,6 +59,11 @@ export default function LoginForm({
     axios(configuration)
       .then((result) => {
         setStatus(true);
+        if (rememberMe) {
+          // Save the username and password to local storage if remember me is checked
+          localStorage.setItem("rememberedUsername", username);
+          localStorage.setItem("rememberedPassword", password);
+        }
         localStorage.setItem("accessToken", result.data.data.token);
       })
       .catch((error) => {
@@ -60,6 +85,7 @@ export default function LoginForm({
       }, 3100);
     }
   };
+
   return (
     <Box component="form" maxWidth={400} width="100%" onSubmit={onSignin}>
       <Stack spacing={3}>
@@ -106,9 +132,14 @@ export default function LoginForm({
         <Stack direction="row">
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox />}
+              control={
+                <Checkbox
+                  checked={rememberMe}
+                  onChange={handleRememberMeChange}
+                />
+              }
               label="Remember me"
-            ></FormControlLabel>
+            />
           </FormGroup>
           <Typography color="error" fontWeight="bold" />
         </Stack>
