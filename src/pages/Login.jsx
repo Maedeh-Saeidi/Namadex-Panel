@@ -60,7 +60,7 @@ export default function Login() {
               p: 5,
             }}
           >
-            <img src="images/Namadex.svg" alt="Logo" height={60} />
+            <img src="images/NamadEx.png" alt="Logo" height={50} width={100} />
           </Box>
           <Box
             sx={{
